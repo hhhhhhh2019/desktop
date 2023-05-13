@@ -1,0 +1,9 @@
+.root_window {
+	background: #ffffff;
+}
+
+.desktop_icon {
+	border-width: 0;
+	box-shadow: none;
+	background: rgba(0,0,0, 0);
+}
