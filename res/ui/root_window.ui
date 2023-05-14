@@ -6,26 +6,137 @@
 		<property name="type-hint">desktop</property>
 		<signal name="set-focus" handler="update_icons" swapped="no"/>
 
+		<style>
+			<class name="root_window"/>
+		</style>
+
 		<child>
-			<object class="GtkScrolledWindow">
-				<property name="border-width">64</property>
+			<object class="GtkBox">
+				<property name="orientation">vertical</property>
 
 				<child>
-					<object class="GtkViewport">
+					<object class="GtkScrolledWindow">
+						<property name="border-width">32</property>
+
 						<child>
-							<object class="GtkGrid" id="grid">
-								<property name="column-homogeneous">True</property>
-								<property name="row-spacing">16</property>
-								<property name="column-spacing">16</property>
+							<object class="GtkViewport">
+								<child>
+									<object class="GtkGrid" id="grid">
+										<property name="column-homogeneous">True</property>
+										<property name="row-spacing">16</property>
+										<property name="column-spacing">16</property>
+									</object> <!-- GtkGrid -->
+								</child>
+							</object> <!-- GtkViewport -->
+						</child>
+					</object> <!-- GtkScrolledWindow -->
+
+					<packing>
+						<property name="expand">True</property>
+						<property name="fill">True</property>
+						<property name="position">1</property>
+					</packing>
+				</child>
+
+				<child>
+					<object class="GtkBox">
+						<property name="height-request">40</property>
+						<property name="orientation">horizontal</property>
+
+						<style>
+							<class name="status_bar"/>
+						</style>
+
+						<child>
+							<object class="GtkLabel">
+								<property name="label">hello</property>
 							</object>
 						</child>
+					</object> <!-- GtkEventBox -->
+
+					<packing>
+						<property name="fill">True</property>
+						<property name="position">0</property>
+					</packing>
+				</child>
+			</object> <!-- GtkBox -->
+		</child>
+	</object> <!-- GtkWindow -->
+
+
+	<object class="GtkAdjustment" id="adjustment1">
+		<property name="upper">250</property>
+		<property name="step-increment">1</property>
+		<property name="page-increment">10</property>
+	</object>
+
+
+	<object class="GtkWindow" id="panel_window">
+		<property name="width-request">720</property>
+    <property name="height-request">1280</property>
+		<property name="type">popup</property>
+		<property name="type-hint">dropdown-menu</property>
+		<property name="app-paintable">True</property>
+
+		<signal name="motion-notify-event" handler="panel_motion_notify" swapped="no"/>
+		<signal name="button_press-event" handler="panel_button_press" swapped="no"/>
+		<signal name="button_release-event" handler="panel_button_release" swapped="no"/>
+
+		<style>
+			<class name="panel_window"/>
+		</style>
+
+		<child>
+			<object class="GtkBox">
+				<property name="orientation">vertical</property>
+				<property name="border-width">32</property>
+
+				<child>
+					<object class="GtkBox">
+						<property name="height-request">640</property>
+						<property name="orientation">vertical</property>
+
+						<child>
+							<object class="GtkScale">
+								<property name="adjustment">adjustment1</property>
+								<property name="fill-level">250</property>
+								<property name="round-digits">1</property>
+								<property name="draw-value">False</property>
+								<property name="hexpand">1</property>
+								<property name="height-request">64</property>
+							</object>
+
+							<packing>
+								<property name="expand">True</property>
+								<property name="fill">True</property>
+								<property name="position">0</property>
+							</packing>
+						</child>
+
+						<child>
+							<object class="GtkStack" id="panel_stack">
+								<property name="height-request">576</property>
+
+								<style>
+									<class name="panel_stack"/>
+								</style>
+							</object>
+
+							<packing>
+								<property name="expand">True</property>
+								<property name="fill">True</property>
+								<property name="position">1</property>
+							</packing>
+						</child>
+					</object>
+				</child>
+
+				<child>
+					<object class="GtkBox">
+						<property name="height-request">600</property>
 					</object>
 				</child>
 			</object>
 		</child>
-
-		<style>
-			<class name="root_window"/>
-		</style>
 	</object>
 </interface>

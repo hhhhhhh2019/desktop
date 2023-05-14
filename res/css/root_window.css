@@ -7,3 +7,27 @@
 	box-shadow: none;
 	background: rgba(0,0,0, 0);
 }
+
+.status_bar {
+	background: #000000;
+	color: #ffffff;
+	font-size: 20px;
+}
+
+
+.panel_window {
+	background: rgba(100,0,0, 0);
+}
+
+slider {
+	min-width: 64px;
+	min-height: 64px;
+}
+
+scale {
+	background: #000;
+}
+
+.panel_stack {
+	background: #222;
+}

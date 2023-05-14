@@ -2,5 +2,6 @@
 <gresources>
 	<gresource prefix="/com/Cher/Desktop">
 		<file>ui/root_window.ui</file>
+		<file>css/root_window.css</file>
 	</gresource>
 </gresources>
