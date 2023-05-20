@@ -19,6 +19,9 @@ GtkWidget* root_window;
 GtkWidget* grid;
 
 GtkWidget* panel_window;
+GtkWidget* panel_stack;
+GtkWidget* panel_switcher;
+
 char panel_is_button_press = 0;
 int panel_last_x, panel_last_y;
 char panel_open = 0;
@@ -44,6 +47,8 @@ void panel_motion_notify (GtkWidget*, GdkEventMotion, gpointer);
 void panel_button_press  (GtkWidget*, GdkEventButton, gpointer);
 void panel_button_release(GtkWidget*, GdkEventButton, gpointer);
 void on_swipe(GtkGestureSwipe*, gdouble, gdouble, gpointer);
+
+void panel_stack_change(GtkStack*, gpointer);
 
 
 int main(int argc, char** argv) {
@@ -72,22 +77,35 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	root_window  = GTK_WIDGET(gtk_builder_get_object(builder, "root_window"));
-	grid         = GTK_WIDGET(gtk_builder_get_object(builder, "grid"));
+	root_window    = GTK_WIDGET(gtk_builder_get_object(builder, "root_window"));
+	grid           = GTK_WIDGET(gtk_builder_get_object(builder, "grid"));
 
-	panel_window = GTK_WIDGET(gtk_builder_get_object(builder, "panel_window"));
+	panel_window   = GTK_WIDGET(gtk_builder_get_object(builder, "panel_window"));
+	panel_stack    = GTK_WIDGET(gtk_builder_get_object(builder, "panel_stack"));
+	panel_switcher = GTK_WIDGET(gtk_builder_get_object(builder, "panel_switcher"));
+
 	gtk_window_move(GTK_WINDOW(panel_window), 0,-1240);
-
 	GdkScreen *screen = gtk_widget_get_screen(panel_window);
 	GdkVisual *visual = gdk_screen_get_rgba_visual(screen);
 	gtk_widget_set_visual(panel_window, visual);
-
 	gtk_window_set_decorated(GTK_WINDOW(panel_window), 0);
 	g_signal_connect(panel_window, "draw", G_CALLBACK(panel_expose), NULL);
 
 	gtk_builder_connect_signals(builder, NULL);
 
-	//update_icons();
+
+	GtkWidget* lbl1 = gtk_label_new("1");
+	GtkWidget* lbl2 = gtk_label_new("2");
+	GtkWidget* lbl3 = gtk_label_new("3");
+
+	gtk_stack_add_named(GTK_STACK(panel_stack), lbl1, "1");
+	gtk_stack_add_named(GTK_STACK(panel_stack), lbl2, "2");
+	gtk_stack_add_named(GTK_STACK(panel_stack), lbl3, "3");
+
+	gtk_stack_switcher_set_stack(GTK_STACK_SWITCHER(panel_switcher), GTK_STACK(panel_stack));
+
+	g_signal_connect(panel_stack, "notify::visible-child", G_CALLBACK(panel_stack_change), NULL);
+
 
 	gtk_widget_show_all(root_window);
 	gtk_widget_show_all(panel_window);
@@ -249,3 +267,8 @@ void panel_button_release(GtkWidget*, GdkEventButton, gpointer) {
 		}
 	}
 }
+
+
+
+void panel_stack_change(GtkStack* stack, gpointer) {
+	}

@@ -115,7 +115,7 @@
 
 						<child>
 							<object class="GtkStack" id="panel_stack">
-								<property name="height-request">576</property>
+								<property name="height-request">546</property>
 
 								<style>
 									<class name="panel_stack"/>
@@ -126,6 +126,23 @@
 								<property name="expand">True</property>
 								<property name="fill">True</property>
 								<property name="position">1</property>
+							</packing>
+						</child>
+
+						<child>
+							<object class="GtkStackSwitcher" id="panel_switcher">
+								<!--property name="homogeneous">True</property-->
+								<property name="halign">center</property>
+
+								<style>
+									<class name="panel_switcher"/>
+								</style>
+							</object>
+
+							<packing>
+								<property name="expand">False</property>
+								<property name="fill">False</property>
+								<property name="position">2</property>
 							</packing>
 						</child>
 					</object>

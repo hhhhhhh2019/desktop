@@ -29,5 +29,13 @@ scale {
 }
 
 .panel_stack {
-	background: #222;
+	background: #eee;
+}
+
+.panel_switcher {
+	background: #555;
+}
+
+button:active {
+	border-radius: 100px;
 }
